@@ -1,6 +1,7 @@
 const express = require("express");
 require("dotenv").config();
 const cors = require("cors");
+const jwt = require('jsonwebtoken')
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const port = process.env.PORT || 3000;
 const app = express();
@@ -22,6 +23,14 @@ async function run() {
     const database = client.db("coffee-store");
     const coffeeCollection = database.collection("coffees");
     const orderCollection = database.collection("orders");
+
+    // generete jwt
+    app.post('jwt', (req,res) => {
+      const user = {email: req.body.email}
+    })
+
+
+
     app.get("/coffees", async (req, res) => {
       const allCoffees = await coffeeCollection.find().toArray();
       console.log(allCoffees);

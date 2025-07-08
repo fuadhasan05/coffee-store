@@ -81,7 +81,7 @@ const CoffeeDetails = () => {
       >
         &larr; Back
       </button>
-      <div className="bg-white rounded-lg shadow-lg flex flex-col md:flex-row overflow-hidden">
+      <div className=" rounded-lg shadow-lg flex flex-col md:flex-row overflow-hidden">
         <img
           src={photo}
           alt={name}

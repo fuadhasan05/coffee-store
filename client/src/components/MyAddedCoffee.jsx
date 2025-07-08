@@ -1,10 +1,11 @@
-import { useState } from "react"
-import { useLoaderData } from "react-router"
-import CoffeeCard from "./CoffeeCard"
+import React from 'react';
+import { useState } from 'react';
+import { useLoaderData } from 'react-router';
+import CoffeeCard from './CoffeeCard';
 
-const Home = () => {
+const MyAddedCoffee = () => {
   const data = useLoaderData()
-  const [coffees, ] = useState(data || [])
+  const [coffees] = useState(data || [])
   console.log(coffees)
   return (
     <div>
@@ -20,4 +21,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default MyAddedCoffee;

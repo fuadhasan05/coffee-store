@@ -1,12 +1,41 @@
+import { use } from 'react'
 import Swal from 'sweetalert2'
+import { AuthContext } from '../contexts/AuthContext'
+import { useNavigate } from 'react-router'
 
 const AddCoffee = () => {
+  const navigate = useNavigate()
+  const {user} = use(AuthContext)
   const handleAddCoffee = e => {
     e.preventDefault()
     const form = e.target
 
     const formData = new FormData(form)
     const newCoffee = Object.fromEntries(formData.entries())
+    newCoffee.email = user?.email
+    newCoffee.likedBy = []
+
+    // save coffee data
+    fetch(`${import.meta.env.VITE_API_URL}/add-coffee`, {
+      method: 'POST',
+      headers: {
+        'content-type' : 'application/json',
+      },
+      body: JSON.stringify(newCoffee),
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      Swal.fire({
+        title: 'Good Job!',
+        text: 'Data Added Successfully',
+        icon: 'success'
+      })
+      navigate('/')
+    })
+    .catch(err => {
+      console.log(err);
+    })
 
     console.log(newCoffee)
   }
